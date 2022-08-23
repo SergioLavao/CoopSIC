@@ -14,7 +14,6 @@ HexGrid = HexGrid( [5,5] , d )#Create Hex grid network
 BS1 = HexGrid.activateBS( 1, 1 )#Get BS via row, column
 BS2 = HexGrid.activateBS( 1, 2 )#Get BS via row, column
 
-
 U1 = BS1.addUser([d,0])
 U1_Slave1 = BS2.addUser([-d,0]),
 

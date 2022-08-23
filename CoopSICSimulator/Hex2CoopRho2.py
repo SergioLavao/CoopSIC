@@ -60,7 +60,7 @@ U4_Slave = BS10.addUser([-x_edge,-y_edge])
 BS11 = HexGrid.activateBS( 0, 2 )#Get BS via row, column
 BS12 = HexGrid.activateBS( 0, 3 )#Get BS via row, column
 
-#BS11.addSlaveBS( BS12 )
+##S11.addSlaveBS( BS12 )
 U5 = BS11.addUser([x_edge,y_edge])
 U5_Slave = BS12.addUser([-x_edge,-y_edge])
 

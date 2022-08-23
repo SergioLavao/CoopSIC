@@ -80,7 +80,7 @@ class HexGrid:
 		return f_rho
 
 	def getUserCapacity( self, index, user, alpha, visualize ):
-		return f"C_U{index} = log2( 1 + ( (SNR * { round( np.power( user.getDistanceToBS() / self.d  , -alpha), 4) } )./ ( rho + { round( self.getUser_f_rho( user, alpha , visualize ), 4 ) } .* SNR ) ) );"
+		return f"C_U{index} = rho * log2( 1 + ( (SNR * { round( np.power( user.getDistanceToBS() / self.d  , -alpha), 4) } )./ ( rho + { round( self.getUser_f_rho( user, alpha , visualize ), 4 ) } .* SNR ) ) );"
 
 	def getNetworkCapacity( self, alpha ):
 		index = 0
