@@ -47,7 +47,7 @@ U3 = BS7.addUser([x_corner,-y_corner])
 U3_Slave1 = BS8.addUser([-d,0]),
 U3_Slave2 = BS9.addUser([x_corner,y_corner]),
 
-HexGrid.getNetworkCapacity( alpha )
+HexGrid.getNetworkCapacity( alpha, False )
 
 dpg.start_dearpygui()
 dpg.destroy_context()

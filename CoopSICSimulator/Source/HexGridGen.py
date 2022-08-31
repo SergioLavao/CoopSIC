@@ -84,7 +84,7 @@ class HexGrid:
 	def getUserCapacity( self, index, user, alpha, visualize ):
 		return f"C_U{index} = rho * log2( 1 + ( (SNR * { round( np.power( user.getDistanceToBS() / self.d  , -alpha), 4) } )./ ( rho + { round( self.getUser_f_rho( user, alpha , visualize ), 4 ) } .* SNR ) ) );"
 
-	def getNetworkCapacity( self, alpha ):
+	def getNetworkCapacity( self, alpha, visualize ):
 		index = 0
 
 		Network_Capacity = 'NetworkCapacity = '
@@ -92,7 +92,7 @@ class HexGrid:
 		for BS in self.BSs:
 			for user in BS.users: 
 				index = index + 1
-				print( self.getUserCapacity( index, user, alpha, True ) )
+				print( self.getUserCapacity( index, user, alpha, visualize ) )
 				Network_Capacity = Network_Capacity + f' C_U{index} +' 
 
 		print( Network_Capacity, ';' )
@@ -122,3 +122,13 @@ class HexGrid:
 		BS3.setTrisecAntenna( BS1 )
 
 		return [BS1, BS2, BS3]
+
+	def getSystemRhoProduct( self, alpha ):
+		product_f_rho = 1
+
+		for BS in self.BSs:
+			for user in BS.users: 
+				f_rho = self.getUser_f_rho( user, alpha, True )
+				product_f_rho = product_f_rho * ( ( 1/f_rho ) + 1 )
+
+		return product_f_rho
