@@ -123,12 +123,12 @@ class HexGrid:
 
 		return [BS1, BS2, BS3]
 
-	def getSystemRhoProduct( self, alpha ):
+	def getSystemRhoProduct( self, alpha, visualize ):
 		product_f_rho = 1
 
 		for BS in self.BSs:
 			for user in BS.users: 
-				f_rho = self.getUser_f_rho( user, alpha, True )
+				f_rho = self.getUser_f_rho( user, alpha, visualize )
 				product_f_rho = product_f_rho * ( ( 1/f_rho ) + 1 )
 
 		return product_f_rho
