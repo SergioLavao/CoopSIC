@@ -19,10 +19,10 @@ class User:
 		self.relative_position = relative_position
 		self.absolute_position = [ BS.position[0] + relative_position[0], BS.position[1] + relative_position[1] ]
 		self.UserCircle = dpg.draw_circle( center = self.absolute_position, color=[255, 0, 0,255], fill=[255, 0, 0,255],radius=0.07, parent='NetworkPlot' )
-		self.plotRay( BS.position, [255, 128, 0,50] )
+		self.plotRay( BS.antenna_absolute_position, [255, 128, 0,50] )
 
 	def getDistanceToBS( self ):
-		distance = np.linalg.norm( np.array( self.absolute_position ) - np.array( self.BS.position ) )
+		distance = np.linalg.norm( np.array( self.absolute_position ) - np.array( self.BS.antenna_absolute_position ) )
 		return distance
 
 	def plotRay( self, vec2_to, color ):

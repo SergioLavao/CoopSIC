@@ -4,6 +4,8 @@ import dearpygui.dearpygui as dpg
 
 from BaseStation import BaseStation
 
+#HexGrid (Singleton!): Defines the network based on a size[nxn] 
+
 class HexGrid:
 
 	d = 0 #Distance to cell corner
@@ -71,10 +73,10 @@ class HexGrid:
 
 		for BS in self.BSs:
 			if BS.active:
-				if BS != user.BS and BS not in user.BS.slavesBS:
-					f_rho = f_rho + np.power( np.linalg.norm( np.array( user.absolute_position ) - np.array( BS.position ) ) , -alpha )
+				if BS != user.BS and BS not in user.BS.slavesBS and not BS.trisec_slave and BS != user.BS.trisec_mainBS:
+					f_rho = f_rho + np.power( np.linalg.norm( np.array( user.absolute_position ) - np.array( BS.antenna_absolute_position ) ) , -alpha )
 					if visualizeInterference:
-						user.plotRay( BS.position, [255,0,0,200] )
+						user.plotRay( BS.antenna_absolute_position, [255,0,0,100] )
 
 		f_rho = f_rho * np.power( self.d , alpha ) 
 		return f_rho
@@ -90,8 +92,33 @@ class HexGrid:
 		for BS in self.BSs:
 			for user in BS.users: 
 				index = index + 1
-				print( self.getUserCapacity( index, user, alpha, False ) )
+				print( self.getUserCapacity( index, user, alpha, True ) )
 				Network_Capacity = Network_Capacity + f' C_U{index} +' 
 
 		print( Network_Capacity, ';' )
 		print( f'NetworkCapacityNormalized = NetworkCapacity / {self.N}; %[NetCap/Cells] ' )
+
+	def activateTrisec( self, row , col ):
+		
+		fixed_row = row
+		fixed_col = col
+
+		if row % 2 != 0:
+			fixed_col = col + 1
+		else:
+			fixed_col = col + 1
+
+		if col % 2 != 0:
+			fixed_row = row + 1
+		else:
+			fixed_row = row - 1
+
+		BS1 = self.activateBS( row, col )#Get BS via row, column
+		BS2 = self.activateBS( row, fixed_col )#Get BS via row, column
+		BS3 = self.activateBS( fixed_row, fixed_col )#Get BS via row, column
+
+		BS1.setMainTrisecAntenna()
+		BS2.setTrisecAntenna( BS1 )
+		BS3.setTrisecAntenna( BS1 )
+
+		return [BS1, BS2, BS3]
