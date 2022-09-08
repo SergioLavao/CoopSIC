@@ -1,9 +1,7 @@
 import dearpygui.dearpygui as dpg
 import numpy as np
-from User import User
 
-import sympy as sym
-
+from UserIaN import UserIaN
 from Hexagon import Hexagon
 
 class BaseStation( Hexagon ):
@@ -16,7 +14,6 @@ class BaseStation( Hexagon ):
 	active = False
 	antenna_absolute_position = [0,0]
 
-
 	def __init__( self, index, radius ):
 		super().__init__( index, radius )
 
@@ -27,13 +24,15 @@ class BaseStation( Hexagon ):
 	def SetPower( self, Power ):
 		self.Power = Power
 
+	def SetPowerDB( self, Power ):
+		self.Power = np.power( 10 , Power / 10) 
+
 	#Set BS activation state
 	def Activate( self ):
 		self.ChangeColor( [0,255,0,150] )
 		self.active = True
 
 	#Add user to BS
-	def AddUser( self, alias="User", position=[0.0,0.0] ):
-		user = User( self, alias, position )
+	def AddUser( self, user ):
 		self.users.append( user )
 		return user
