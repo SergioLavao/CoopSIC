@@ -9,6 +9,7 @@ class UserCoopSIC ( UserBase ):
 
 	def __init__( self, BS, alias, relative_position ):
 		super().__init__( BS, alias, relative_position )
+		self.user_type = 'CoopSIC'
 	
 	def SetSICMaster( self, sic_master ):
 		self.sic_master = sic_master
@@ -26,7 +27,7 @@ class UserCoopSIC ( UserBase ):
 		numerator = self.BS.Power * self.ChannelFadingGain( self.BS , alpha )
 		
 		if sic_master:
-			numerator = self.BS.Power * self.ChannelFadingGain( sic_master.BS , alpha )
+			numerator = self.BS.Power * sic_master.ChannelFadingGain( self.BS , alpha )
 		
 		interference = 0
 
@@ -35,12 +36,11 @@ class UserCoopSIC ( UserBase ):
 				
 				BS_interference = 0
 
-				if sic_master:
-					if BS != sic_master.BS:
-						BS_interference = BS.Power * sic_master.ChannelFadingGain( BS, alpha )
-				elif BS != self.BS:
+				if BS != self.BS:
 					BS_interference = BS.Power * self.ChannelFadingGain( BS , alpha )
-				
+					if sic_master: #User has a master
+						BS_interference = BS.Power * sic_master.ChannelFadingGain( BS, alpha )
+					
 				for slave in self.sic_slaves:
 					if slave.BS == BS:
 						BS_interference = 0
@@ -51,4 +51,4 @@ class UserCoopSIC ( UserBase ):
 
 		self.sinr = numerator / denominator
 
-		return ( f'SINR_PDM_{self.alias} = { self.sinr };' )
+		return ( f'SINR_CoopSIC_{self.alias} = { self.sinr };' )

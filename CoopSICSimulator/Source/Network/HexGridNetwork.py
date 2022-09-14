@@ -24,3 +24,7 @@ class HexGridNetwork( NetworkViewport ):
 			if BS.index == ( row , column ):
 				BS.Activate()
 				return BS
+
+	def ClearUsers( self ):
+		for BS in self.BSs:
+			BS.users.clear()

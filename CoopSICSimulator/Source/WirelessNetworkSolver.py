@@ -6,6 +6,7 @@ sys.path.append("./Source/BaseStation")
 from HexGridNetwork import HexGridNetwork
 
 from UserIaN import UserIaN
+from UserOMA import UserOMA
 from UserPDM import UserPDM
 from UserCoopSIC import UserCoopSIC
 

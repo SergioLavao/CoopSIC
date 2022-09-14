@@ -8,7 +8,8 @@ class UserPDM( UserBase ):
 
 	def __init__( self, BS, alias, relative_position ):
 		super().__init__( BS, alias, relative_position )
-		
+		self.user_type = 'PDM'
+
 	def SetSICSlaves( self, sic_slaves ):
 		self.sic_slaves = sic_slaves 
 

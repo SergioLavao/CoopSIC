@@ -2,7 +2,11 @@ import dearpygui.dearpygui as dpg
 
 class NetworkViewport:
 
+	hex_radius = 1
+
 	def __init__( self, networkSize, hex_radius=1 ):
+
+		self.hex_radius = hex_radius
 
 		dpg.create_context()
 
