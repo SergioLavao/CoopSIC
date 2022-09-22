@@ -39,5 +39,8 @@ class Hexagon:
 
 		return points
 
+	def plotRay( self, f , t , color):
+		dpg.draw_polygon(parent="NetworkPlot",points=[ f , t ], color=color, thickness=1 )
+
 	def ChangeColor( self , Color ):
 		dpg.configure_item( item=self.polygon , color=Color , thickness=2 )

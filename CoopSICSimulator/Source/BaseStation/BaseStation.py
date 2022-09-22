@@ -17,9 +17,18 @@ class BaseStation( Hexagon ):
 	def __init__( self, index, radius ):
 		super().__init__( index, radius )
 
+		self.radius = radius
 		self.Power = 60
 		self.users = []
 		self.antenna_absolute_position = self.position
+
+	def SetAntennaRelativePosition( self, relativePosition ):
+		self.antenna_absolute_position = [self.position[0] + relativePosition[0] , self.position[1] + relativePosition[1]]
+		self.plotRay( self.position, self.antenna_absolute_position, [255,0,255,255] )
+
+	def SetAntennaAbsolutePosition( self, absolutePosition ):
+		self.antenna_absolute_position = absolutePosition
+		self.plotRay( self.position, self.antenna_absolute_position, [255,0,255,255] )
 
 	def SetPower( self, Power ):
 		self.Power = Power
