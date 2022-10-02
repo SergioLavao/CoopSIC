@@ -13,8 +13,9 @@ rho = 1
 BS1 = Network.ActivateBS( 0 , 0 )
 BS2 = Network.ActivateBS( 1 , 0 )
 
-P1 = 1#dB
-P2 = 100#dB
+
+P1 = Parameter('P1')
+P2 = Parameter('P2')
 
 
 BS1.SetPower( P1 )

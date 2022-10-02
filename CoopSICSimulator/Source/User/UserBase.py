@@ -42,6 +42,9 @@ class UserBase:
 		'''Returns the euclidean distance from the user absolute position to a desired BS antenna.'''
 		return ( self.EuclideanDistance( self.absolute_position , position  ) )
 
+	def GetUserAliasVariable( self ):
+		return f'C_{self.user_type}_{self.alias}';
+
 	def plotRay( self, vec2_to, color ):
 		dpg.draw_polygon(parent="NetworkPlot",points=[ self.absolute_position , vec2_to ], color=color, thickness=1 )
 

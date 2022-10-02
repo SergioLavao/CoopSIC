@@ -9,6 +9,8 @@ class BaseStation( Hexagon ):
 	#BS Power[dB]
 	Power = 0
 
+	alias = 'BS'
+
 	#Antenna absolute position relative to HexGridNetwork, interferences are calculated based on this position.
 	users = []
 	active = False
@@ -39,6 +41,10 @@ class BaseStation( Hexagon ):
 	#Set BS activation state
 	def Activate( self ):
 		self.ChangeColor( [0,255,0,150] )
+		self.active = True
+
+	def Deactivate( self ):
+		self.ChangeColor( [255,255,255,50] )
 		self.active = True
 
 	#Add user to BS

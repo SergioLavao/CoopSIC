@@ -1,13 +1,15 @@
 import sympy as sym
 from UserBase import UserBase
 
-''' Interference as Cooperative SIC '''
-class UserCoopSIC ( UserBase ):
+''' Cooperative SIC plus PDM '''
+class UserPDMCoopSIC ( UserBase ):
 
-	technique = 'CoopSIC'
+	technique = 'PDMCoopSIC'
 
 	sic_slaves = []
 	sic_master = None
+
+	alpha = 1
 
 	def __init__( self, BS, alias, relative_position ):
 		super().__init__( BS, alias, relative_position )
@@ -44,9 +46,17 @@ class UserCoopSIC ( UserBase ):
 					BS_interference = 0 #Initialize a new interference source
 					
 					if user != self: #If user 
-						BS_interference = BS.Power * self.ChannelFadingGain( BS , alpha )
+						if BS == self.BS:
+							if self.alpha == 1:
+								self.alpha = 1/len(BS.users)
+							BS_interference = ( self.alpha * BS.Power ) * self.ChannelFadingGain( BS , alpha )
+						else:
+							BS_interference = BS.Power * self.ChannelFadingGain( BS , alpha )
+						print( user.alias )
+
 						if sic_master: #User has a master
 							BS_interference = BS.Power * sic_master.ChannelFadingGain( BS, alpha )
+
 					for slave in self.sic_slaves:
 						if slave == user:
 							BS_interference = 0
@@ -57,4 +67,4 @@ class UserCoopSIC ( UserBase ):
 
 		self.sinr = numerator / denominator
 
-		return ( f'SINR_CoopSIC_{self.alias} = { self.sinr };' )
+		return ( f'SINR_PDMCoopSIC_{self.alias} = { self.sinr };' )
