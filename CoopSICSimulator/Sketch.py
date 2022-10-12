@@ -1,25 +1,33 @@
 import sys
-import numpy as np
-import dearpygui.dearpygui as dpg
 sys.path.append("./Source")
 
-from HexGridGen import HexGrid
+from WirelessNetworkSolver import *
 
-d = 1 #Distance to edge 
-alpha = 3
-rho = 1
+P = Parameter('P')
+beta = Parameter('beta')
 
-HexGrid = HexGrid( [5,5] , d )#Create Hex grid network
+P_1 = Parameter('P1')
+P_2 = Parameter('P2')
 
-BS1 = HexGrid.activateBS( 1, 1 )#Get BS via row, column
-BS2 = HexGrid.activateBS( 1, 2 )#Get BS via row, column
+N_0, W, rho, alpha = Parameters('N_0 W rho alpha')
 
-U1 = BS1.addUser([d,0])
-U1_Slave1 = BS2.addUser([-d,0]),
+edge_distance = 1
+radius = SetRadiusFromEdge( edge_distance ) 
 
-BS1.addSlaveBS( BS2 )
+Network = HexGridNetwork( [2,2], radius )
 
-HexGrid.getNetworkCapacity( alpha )
+BS1 = Network.ActivateBS( 0 , 0 )
+BS2 = Network.ActivateBS( 1 , 0 )
 
-dpg.start_dearpygui()
-dpg.destroy_context()
+BS1.SetPower( P_1 )
+BS2.SetPower( P_2 )
+
+U1 = UserCoopSIC( BS1, 'User1', [0.0,Parameter('d1')] )
+U2 = UserCoopSIC( BS2, 'User2', [0.0,-1.0] )
+
+U1.SetSICSlaves( [ U2 ] )
+
+print( Python2MatlabExpression( U1.GetSINR( Network, N_0, W, rho, alpha ) ) )
+print( Python2MatlabExpression( U2.GetSINR( Network, N_0, W, rho, alpha ) )  )
+
+VisualizeNetwork()
