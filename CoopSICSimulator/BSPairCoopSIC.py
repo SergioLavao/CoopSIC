@@ -7,7 +7,7 @@ from WirelessNetworkSolver import *
 
 distance_to_edge = 1.0
 Network = HexGridNetwork( [2,2], SetRadiusFromEdge( distance_to_edge ) )
-Network.SetNetworkParameters( Parameter('W'), Parameter('rho'), Parameter('N_0'), Parameter('alpha') )
+Network.SetNetworkParameters( Parameter('W'), Parameter('rho'), Parameter('N_0'), Parameter('alpha'), Parameter('P') )
 
 BS1 = Network.ActivateBS( 0 , 0, 'BS1' )
 BS2 = Network.ActivateBS( 1 , 0, 'BS2' )

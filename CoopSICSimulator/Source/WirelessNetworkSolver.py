@@ -26,7 +26,7 @@ def Parameters( alias ):
 def SetRadiusFromEdge( edge = 1 ) -> float:
 	return edge/np.cos( np.pi/6 )
 
-def Python2MatlabExpression( expression ) -> str:
+def MatlabExpression( expression ) -> str:
 	return expression.replace("**",".^").replace("/","./").replace("*",".*").replace("1.0.*","").replace("(1).*","")
 	
 def VisualizeNetwork():

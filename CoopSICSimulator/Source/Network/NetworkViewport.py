@@ -18,10 +18,10 @@ class NetworkViewport:
 			with dpg.plot( no_menus=False, no_title=True, no_box_select=False, no_mouse_pos=False, width=500,
 				height=500, equal_aspects=True, tag="NetworkPlot") as NetworkCanvas:
 
-				axis_x = dpg.add_plot_axis(axis=0,label="X Axis[km]", lock_min=True,lock_max=True)
+				axis_x = dpg.add_plot_axis(axis=dpg.mvXAxis,label="X Axis[km]", lock_min=True,lock_max=True)
 				dpg.set_axis_limits(axis=axis_x, ymin=0, ymax=networkSize[1]*hex_radius*2)
-
-				axis_y = dpg.add_plot_axis(axis=1,label="Y Axis[km]", lock_min=True,lock_max=True)
+				
+				axis_y = dpg.add_plot_axis(axis=dpg.mvYAxis,label="Y Axis[km]", lock_min=True,lock_max=False)
 				dpg.set_axis_limits(axis=axis_y, ymin=0, ymax=networkSize[0]*hex_radius*2)
 
 		dpg.setup_dearpygui()
