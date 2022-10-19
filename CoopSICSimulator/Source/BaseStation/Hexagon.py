@@ -11,6 +11,8 @@ class Hexagon:
 	#Visalization tools
 	polygon = None
 
+	hexagonPoints = []
+
 	def __init__( self, index, radius ):
 		self.index = index
 		polygon_points = self.CreateGeometry( index[0],index[1], radius )
@@ -37,6 +39,7 @@ class Hexagon:
 			[ x_ref + position[0], -y_ref + position[1] ],
 			[ radius + position[0], position[1] ] ]
 
+		self.hexagonPoints = points
 		return points
 
 	def plotRay( self, f , t , color):
@@ -44,3 +47,6 @@ class Hexagon:
 
 	def ChangeColor( self , Color ):
 		dpg.configure_item( item=self.polygon , color=Color , thickness=2 )
+
+	def GetHexagonPoints( self ):
+		return self.hexagonPoints

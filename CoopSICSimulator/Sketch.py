@@ -30,4 +30,16 @@ U1.SetSICSlaves( [ U2 ] )
 print( MatlabExpression( U1.GetSINR( Network, N_0, W, rho, alpha ) ) )
 print( MatlabExpression( U2.GetSINR( Network, N_0, W, rho, alpha ) )  )
 
+Network.GetNetworkExpression()
+
+U1 = UserCoopSIC( BS1, 'User1', [0.0,Parameter('d1')] )
+U2 = UserCoopSIC( BS2, 'User2', [0.0,-1.0] )
+
+U1.SetSICSlaves( [ U2 ] )
+
+print( MatlabExpression( U1.GetSINR( Network, N_0, W, rho, alpha ) ) )
+print( MatlabExpression( U2.GetSINR( Network, N_0, W, rho, alpha ) )  )
+
+Network.GetNetworkExpression()
+
 VisualizeNetwork()

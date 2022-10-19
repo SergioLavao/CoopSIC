@@ -6,6 +6,7 @@ class UserOMA( UserBase ):
 	technique = 'OMA'
 
 	alpha = 1
+	BWFraq = 1
 	powerSplit = 1
 
 	parametersDefined = False
@@ -15,17 +16,18 @@ class UserOMA( UserBase ):
 		self.user_type = 'OMA'
 	
 	def SetOMAParameters( self, BWFraq, PowerSplit ):
-		self.alpha = BWFraq
-		self.powerSplit = powerSplit 
+		self.BWFraq = BWFraq
+		self.powerSplit = PowerSplit 
+		self.parametersDefined = True
 
 	def GetSINR( self, Network, N_0=1, W=1, rho=1, alpha=1 ):
 
-		if not parametersDefined:
+		if not self.parametersDefined:
 			print("% WARN! OMA Parameters( alpha = 1 , powerSplit = 1) this may not be the case ")
 
 		''' Returns the SINR_IaN of the user using Interference as Noise '''
 		numerator = self.BS.Power * self.powerSplit * self.ChannelFadingGain( self.BS, alpha )		
-		denominator = N_0*W*rho
+		denominator = N_0*W*rho*self.BWFraq
 
 		for BS in Network.BSs:
 			if BS.active: #and self.BS != BS:
@@ -38,4 +40,4 @@ class UserOMA( UserBase ):
 
 	def GetCapacity( self, Network, N_0=1, W=1, rho=1, alpha=1 ):
 		self.GetSINR( Network, N_0, self.alpha*W, rho, alpha )
-		return (f'C_{self.user_type}_{self.alias} = ({self.alpha*W*rho})*log2(1 + {sym.N(self.sinr,3)});')
+		return (f'C_{self.user_type}_{self.alias} = ({self.alpha*W*rho*self.BWFraq})*log2(1 + {sym.N(self.sinr,3)});')

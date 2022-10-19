@@ -51,3 +51,7 @@ class BaseStation( Hexagon ):
 	def AddUser( self, user ):
 		self.users.append( user )
 		return user
+
+	def GetMatlabPlot( self ):
+		print( f'{self.alias}polygonX =', np.array(self.GetHexagonPoints())[:,0],";" )
+		print( f'{self.alias}polygony =', np.array(self.GetHexagonPoints())[:,1],";" )
