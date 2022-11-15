@@ -1,0 +1,15 @@
+C_CoopSIC_User2 = log2(1 + P./(3.0.*P + 1.0));
+C_CoopSIC_User4 = log2(1 + P./(3.0.*P + 1.0));
+C_CoopSIC_User1 = log2(1 + P);
+C_CoopSIC_User3 = log2(1 + P./(3.0.*P + 1.0));
+CoopSIC = C_CoopSIC_User2+C_CoopSIC_User4+C_CoopSIC_User1+C_CoopSIC_User3;
+C_OMA_User2 = (0.25).*log2(1 + 2.0.*P);
+C_OMA_User4 = (0.25).*log2(1 + 2.0.*P);
+C_OMA_User1 = (0.25).*log2(1 + 2.0.*P);
+C_OMA_User3 = (0.25).*log2(1 + 2.0.*P);
+OMA = C_OMA_User2+C_OMA_User4+C_OMA_User1+C_OMA_User3;
+C_IaN_User2 = log2(1 + P./(3.0.*P + 1.0));
+C_IaN_User4 = log2(1 + P./(3.0.*P + 1.0));
+C_IaN_User1 = log2(1 + P./(3.0.*P + 1.0));
+C_IaN_User3 = log2(1 + P./(3.0.*P + 1.0));
+IaN = C_IaN_User2+C_IaN_User4+C_IaN_User1+C_IaN_User3;

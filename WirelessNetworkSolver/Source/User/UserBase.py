@@ -52,6 +52,10 @@ class UserBase:
 		self.GetSINR( Network, N_0, W, rho, alpha )
 		return (f'C_{self.user_type}_{self.alias} = ({W*rho})*log2(1 + {sym.N(self.sinr,3)});')
 
+	def GetNumericCapacity( self, Network, N_0=1, W=1, rho=1, alpha=1 ):
+		self.GetSINR( Network, N_0, W, rho, alpha )
+		return W*rho*np.log2( 1 + float(self.sinr) )
+
 	def GetLatexSINR( self, Network, N_0=1, W=1, rho=1, alpha=1 ):
 		self.GetSINR( Network, N_0, W, rho, alpha )
 		return (f'SINR_{self.user_type}_{self.alias} = { sym.latex( sym.N(self.sinr)) }')

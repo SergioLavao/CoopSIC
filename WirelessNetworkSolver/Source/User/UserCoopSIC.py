@@ -1,15 +1,15 @@
 import sympy as sym
 from UserBase import UserBase
 
-''' Cooperative SIC plus PDM '''
-class UserPDMCoopSIC ( UserBase ):
+''' Interference as Cooperative SIC '''
+class UserCoopSIC ( UserBase ):
 
-	technique = 'PDMCoopSIC'
+	technique = 'CoopSIC'
 
 	sic_slaves = []
 	sic_master = None
 
-	alpha = 1
+	isSlave = False
 
 	def __init__( self, BS, alias, relative_position ):
 		super().__init__( BS, alias, relative_position )
@@ -17,6 +17,7 @@ class UserPDMCoopSIC ( UserBase ):
 	
 	def SetSICMaster( self, sic_master ):
 		self.sic_master = sic_master
+		self.isSlave = True
 
 	def SetSICSlaves( self, sic_slaves ):
 		self.sic_slaves = sic_slaves 
@@ -24,16 +25,17 @@ class UserPDMCoopSIC ( UserBase ):
 			slave.SetSICMaster( self )
 
 	def GetSINR( self, Network, N_0=1, W=1, rho=1, alpha=1 ):
-		''' Returns the SINR_IaN of the user using Interference as Noise '''
-		
-		sic_master = self.sic_master
+		''' Returns the SINR_CoopSIC of the user '''
+
+		sic_master = self.sic_master #Defines the SIC Master User.
 
 		numerator = self.BS.Power * self.ChannelFadingGain( self.BS , alpha )
 		
-		if sic_master:
+		if self.isSlave:
 			numerator = self.BS.Power * sic_master.ChannelFadingGain( self.BS , alpha )
 		
 		interference = 0
+		interferenceInternal = 0
 
 		for BS in Network.BSs: #For every BS in the Network
 			if BS.active: #And BS is active
@@ -44,27 +46,31 @@ class UserPDMCoopSIC ( UserBase ):
 				for user in BS.users: #For each user in the BaseStation
 					
 					BS_interference = 0 #Initialize a new interference source
-					
-					if user != self: #If user 
-						if BS == self.BS:
-							if self.alpha == 1:
-								self.alpha = 1/len(BS.users)
-							BS_interference = ( self.alpha * BS.Power ) * self.ChannelFadingGain( BS , alpha )
-						else:
-							BS_interference = BS.Power * self.ChannelFadingGain( BS , alpha )
-						print( user.alias )
+					BS_interferenceInternal = 0 #Initialize a new interference internal corner MAC
 
-						if sic_master: #User has a master
+					if user != self: #If user
+
+						BS_interference = BS.Power * self.ChannelFadingGain( BS , alpha )
+						
+						if self.isSlave: #User has a master
 							BS_interference = BS.Power * sic_master.ChannelFadingGain( BS, alpha )
+					
 
 					for slave in self.sic_slaves:
 						if slave == user:
 							BS_interference = 0
+							BS_interferenceInternal = BS.Power * self.ChannelFadingGain( BS , alpha )
 
 					interference = interference + BS_interference
-		
+					interferenceInternal = interferenceInternal + BS_interferenceInternal
+
+
 		denominator = (N_0*W*rho) + interference
+		denominatorInternal = (N_0*W*rho) + interferenceInternal
 
 		self.sinr = numerator / denominator
+		self.sinrInternal = numerator / denominatorInternal
 
-		return ( f'SINR_PDMCoopSIC_{self.alias} = { self.sinr };' )
+		self.expInternal = f'log2( 1 + { sym.N(self.sinrInternal,3) } );'
+
+		return ( f'SINR_CoopSIC_{self.alias} = { self.sinr }; ' )

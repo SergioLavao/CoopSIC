@@ -41,7 +41,7 @@ for h1_ = -40 : 1 : maxh2Gain
 
     if enableRealTimePlot
 
-        plot(R1_NOMA,R2_NOMA)
+        plot( R1_NOMA , R2_NOMA )
         xlabel("R1 [bps/Hz]")
         ylabel("R2 [bps/Hz]")
         

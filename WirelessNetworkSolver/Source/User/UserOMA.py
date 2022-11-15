@@ -35,7 +35,11 @@ class UserOMA( UserBase ):
 				if len( BS.users ) == 0: #Empty BS (Interference source)
 					denominator = denominator + BS.Power * self.ChannelFadingGain( BS , alpha )
 
+				if self.BS == BS:
+					numerator = numerator / len( BS.users )
+
 		self.sinr = numerator / denominator
+		#print(f'h_{self.alias} = {self.ChannelFadingGain( self.BS, alpha )}')
 		return ( f'SINR_OMA_{self.alias} = { self.sinr };' )
 
 	def GetCapacity( self, Network, N_0=1, W=1, rho=1, alpha=1 ):

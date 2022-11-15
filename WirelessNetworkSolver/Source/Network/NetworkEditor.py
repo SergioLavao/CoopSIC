@@ -58,11 +58,19 @@ class NetworkEditor:
 			for user in BS.users:
 				userCapacity = self.Python2MatlabExpression( user.GetCapacity( Network=network, N_0=network.N_0, W=network.W, rho=network.rho, alpha=network.alpha ))
 				print( userCapacity )
+				
+				try:
+					if user.sinrInternal:
+						pass
+						#print( f'{self.alias}_{user.alias}_Internal = {self.Python2MatlabExpression( user.expInternal )}' )
+				except Exception as e:
+					pass
+
 				capacity = capacity + user.GetUserAliasVariable() + '+'
 
 		capacity = capacity[:-1]
 
-		#capacity = capacity +';'
+		capacity = capacity +';'
 		
 		print( capacity )
 
