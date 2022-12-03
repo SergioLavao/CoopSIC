@@ -1,13 +1,13 @@
 import sys
-sys.path.append("../Source")
+sys.path.append("./Source")
 
 from WirelessNetworkSolver import *
 
 W = 1
 rho = 1
 N_0 = 1
-alpha = 1
-P = 1
+alpha = Parameter("alpha")
+P = Parameter("P")
 
 distance_to_edge = 1.0
 Network = HexGridNetwork( [2,2], SetRadiusFromEdge( distance_to_edge ) )
@@ -21,11 +21,11 @@ BS2 = Network.ActivateBS( 0 , 0, 'BS2' )
 BS1.SetPower( P )
 BS2.SetPower( P )
 
-d1y = -1.0;
-d1x = 0.0;
+d1y = Parameter("d1y");
+d1x = Parameter("d1x");
 
-d2y = 1.0;
-d2x = 0.0;
+d2y = Parameter("d2y");
+d2x = Parameter("d2x");
 
 U1 = UserCoopSIC( BS1, 'User1', [d1x,d1y] )
 U2 = UserCoopSIC( BS2, 'User2', [d2x,d2y] )
@@ -34,10 +34,23 @@ U1.SetSICSlaves([ U2 ])
 
 Editor.AddNetworkModel('CoopSIC')
 
+d1y = Parameter("d1y");
+d1x = Parameter("d1x");
+
+d2y = Parameter("d2y");
+d2x = Parameter("d2x");
+
+U1 = UserCoopSIC( BS1, 'User1', [d1x,d1y] )
+U2 = UserCoopSIC( BS2, 'User2', [d2x,d2y] )
+
+U2.SetSICSlaves([ U1 ])
+
+Editor.AddNetworkModel('CoopSICU2Master')
+
 U1 = UserOMA( BS1, 'User1', [d1x,d1y] )
-U1.SetOMAParameters( 1/2,1 )
+U1.SetOMAParameters( Parameter("alpha_W") ,1 )
 U2 = UserOMA( BS2, 'User2', [d2x,d2y]  )
-U2.SetOMAParameters( 1/2,1 )
+U2.SetOMAParameters( 1 - Parameter("alpha_W"),1 )
 
 Editor.AddNetworkModel('OMA')
 

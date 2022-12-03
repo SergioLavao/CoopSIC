@@ -1,5 +1,5 @@
 import sys
-sys.path.append("../Source")
+sys.path.append("./Source")
 
 from WirelessNetworkSolver import *
 

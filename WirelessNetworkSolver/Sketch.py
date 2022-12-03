@@ -1,5 +1,5 @@
 import sys
-sys.path.append("../Source")
+sys.path.append("./Source")
 
 from WirelessNetworkSolver import *
 
@@ -23,7 +23,7 @@ BS1.SetPower( P_1 )
 BS2.SetPower( P_2 )
 
 U1 = UserCoopSIC( BS1, 'User1', [0.0,Parameter('d1')] )
-U2 = UserCoopSIC( BS2, 'User2', [0.0,-1.0] )
+U2 = UserCoopSIC( BS2, 'User2', [0.0,Parameter('d2')] )
 
 U1.SetSICSlaves( [ U2 ] )
 
@@ -33,7 +33,7 @@ print( MatlabExpression( U2.GetSINR( Network, N_0, W, rho, alpha ) )  )
 Network.GetNetworkExpression()
 
 U1 = UserCoopSIC( BS1, 'User1', [0.0,Parameter('d1')] )
-U2 = UserCoopSIC( BS2, 'User2', [0.0,-1.0] )
+U2 = UserCoopSIC( BS2, 'User2', [0.0,Parameter('d2')] )
 
 U1.SetSICSlaves( [ U2 ] )
 
