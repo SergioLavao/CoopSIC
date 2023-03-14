@@ -31,7 +31,6 @@ OCI =1;
 c = 0;
 [MaxCapOMAOCI, MaxCapCoopSICOCI, MaxCapIaN , i_x] = deal(NaN*ones(1,c)); 
 
-
 for i = 1 : 1 : 101
     c = c + 1;
     MaxCapOMAOCI(i) = OCIOptimalOMAN( P,W,N_0,alpha,d1x(i),d1y(i),d2x(i),d2y(i),d3x(i),d3y(i));
