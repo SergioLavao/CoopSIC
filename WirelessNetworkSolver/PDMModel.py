@@ -41,4 +41,4 @@ Users = [ U1, U2, U3 ]
 
 for user_x in Users:
 	for user_y in Users:
-		print( "P_" + user_x.alias + user_y.alias + " = " + MatlabExpression( f'{ sym.N( P * user_x.ChannelFadingGain( user_y.BS , alpha ), 3 )}' ) + ';' )
+		print( "P_" + user_y.alias + user_x.alias + " = " + MatlabExpression( f'{ sym.N( P * user_x.ChannelFadingGain( user_y.BS , alpha ), 3 )}' ) + ';' )
