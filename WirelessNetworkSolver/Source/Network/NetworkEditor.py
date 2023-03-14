@@ -61,8 +61,7 @@ class NetworkEditor:
 				
 				try:
 					if user.sinrInternal:
-						pass
-						#print( f'{self.alias}_{user.alias}_Internal = {self.Python2MatlabExpression( user.expInternal )}' )
+						print( f'{self.alias}_{user.alias}_Internal = {self.Python2MatlabExpression( user.expInternal )}' )
 				except Exception as e:
 					pass
 
