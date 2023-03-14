@@ -22,7 +22,6 @@ BS1.SetPower( P )
 BS2.SetPower( P )
 BS3.SetPower( P )
 
-
 d1y = Parameter('d1y')
 d1x = Parameter('d1x')
 

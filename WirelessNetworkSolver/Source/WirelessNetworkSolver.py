@@ -1,8 +1,8 @@
 import sys
-sys.path.append("../Source/User")
-sys.path.append("../Source/Network")
-sys.path.append("../Source/BaseStation")
-sys.path.append("../Source/NetworkEditor")
+sys.path.append("./Source/User")
+sys.path.append("./Source/Network")
+sys.path.append("./Source/BaseStation")
+sys.path.append("./Source/NetworkEditor")
 
 from HexGridNetwork import HexGridNetwork
 from NetworkEditor import NetworkEditor
@@ -31,10 +31,6 @@ def MatlabExpression( expression ) -> str:
 def VisualizeNetwork():
 	dpg.start_dearpygui()
 	dpg.destroy_context()
-
-def GetChannelCombinations( Network ):
-	for user in 
-	return 
 
 def ActivateTrisec( Network, row , col ):
 	
