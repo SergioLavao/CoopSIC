@@ -18,7 +18,7 @@ for h1_ = 0 : 1 : maxh2Gain
     h1 = 10^(h1_/10);
     h2 = 10^(h2_/10);
 
-    [R1_OMA , R2_OMA] = OptimalOMA( P, h1, h2, RateVectorSize );
+    [R1_OMA , R2_OMA] = OptimalOMA( P, h1, h2, RateVectorSize, true );
     
     beta = 0:0.01:1;
     

@@ -36,10 +36,11 @@ function CRPairUsers( P, user1RelativePosition , user2RelativePosition, plotTitl
     plot( MAC_U2Master(1,:) , MAC_U2Master(2,:),'-o')
     plot( C_OMA_User1 , C_OMA_User2,'-')
     plot( C_IaN_User1 , C_IaN_User2,'*')
-    legend(["User1 MAC","User2 MAC","OMA MAC","IaN MAC"])
+    legend(["User1 MAC","User2 MAC","OMA","IaN"])
     
     ylabel('R2 [bps/Hz]')
     xlabel('R1 [bps/Hz]')
+    grid on
 
     title(plotTitle)
 

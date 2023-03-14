@@ -14,32 +14,13 @@ N_0, W, rho, alpha = Parameters('N_0 W rho alpha')
 edge_distance = 1
 radius = SetRadiusFromEdge( edge_distance ) 
 
-Network = HexGridNetwork( [2,2], radius )
+Network = HexGridNetwork( [5,5], radius )
+Editor = NetworkEditor( Network )
 
-BS1 = Network.ActivateBS( 0 , 0 )
-BS2 = Network.ActivateBS( 1 , 0 )
+ActivateTrisec( Network, 1 , 1 )
 
-BS1.SetPower( P_1 )
-BS2.SetPower( P_2 )
+ActivateTrisec( Network, 3 , 2 )
 
-U1 = UserCoopSIC( BS1, 'User1', [0.0,Parameter('d1')] )
-U2 = UserCoopSIC( BS2, 'User2', [0.0,-1.0] )
-
-U1.SetSICSlaves( [ U2 ] )
-
-print( MatlabExpression( U1.GetSINR( Network, N_0, W, rho, alpha ) ) )
-print( MatlabExpression( U2.GetSINR( Network, N_0, W, rho, alpha ) )  )
-
-Network.GetNetworkExpression()
-
-U1 = UserCoopSIC( BS1, 'User1', [0.0,Parameter('d1')] )
-U2 = UserCoopSIC( BS2, 'User2', [0.0,-1.0] )
-
-U1.SetSICSlaves( [ U2 ] )
-
-print( MatlabExpression( U1.GetSINR( Network, N_0, W, rho, alpha ) ) )
-print( MatlabExpression( U2.GetSINR( Network, N_0, W, rho, alpha ) )  )
-
-Network.GetNetworkExpression()
+ActivateTrisec( Network, 3 , 0 )
 
 VisualizeNetwork()

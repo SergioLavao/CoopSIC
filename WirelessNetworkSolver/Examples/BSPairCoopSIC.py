@@ -34,16 +34,6 @@ U1.SetSICSlaves([ U2 ])
 
 Editor.AddNetworkModel('CoopSIC')
 
-U1 = UserOMA( BS1, 'User1', [d1x,d1y] )
-U1.SetOMAParameters( 1/2,1 )
-U2 = UserOMA( BS2, 'User2', [d2x,d2y]  )
-U2.SetOMAParameters( 1/2,1 )
-
-Editor.AddNetworkModel('OMA')
-
-U1 = UserIaN( BS1, 'User1', [d1x,d1y] )
-U2 = UserIaN( BS2, 'User2', [d2x,d2y]  )
-
-Editor.AddNetworkModel('IaN')
+print(1/np.cos( np.pi/6 ))
 
 VisualizeNetwork()

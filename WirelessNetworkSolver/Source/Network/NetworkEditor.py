@@ -74,7 +74,7 @@ class NetworkEditor:
 		
 		print( capacity )
 
-		network.ClearUsers()
+		#network.ClearUsers()
 
 	def Python2MatlabExpression( self, expression ):
 		return expression.replace("**",".^").replace("/","./").replace("*",".*").replace("1.0.*","").replace("(1).*","")

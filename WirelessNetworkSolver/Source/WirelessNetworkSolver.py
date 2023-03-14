@@ -1,3 +1,9 @@
+import sys
+sys.path.append("../Source/User")
+sys.path.append("../Source/Network")
+sys.path.append("../Source/BaseStation")
+sys.path.append("../Source/NetworkEditor")
+
 from HexGridNetwork import HexGridNetwork
 from NetworkEditor import NetworkEditor
 
@@ -5,7 +11,6 @@ from UserIaN import UserIaN
 from UserOMA import UserOMA
 from UserPDM import UserPDM
 from UserCoopSIC import UserCoopSIC
-from UserPDMCoopSIC import UserPDMCoopSIC
 
 import numpy as np
 import sympy as sym
@@ -26,6 +31,10 @@ def MatlabExpression( expression ) -> str:
 def VisualizeNetwork():
 	dpg.start_dearpygui()
 	dpg.destroy_context()
+
+def GetChannelCombinations( Network ):
+	for user in 
+	return 
 
 def ActivateTrisec( Network, row , col ):
 	

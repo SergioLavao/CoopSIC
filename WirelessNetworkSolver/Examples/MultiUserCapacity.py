@@ -3,6 +3,8 @@ sys.path.append("../Source")
 
 from WirelessNetworkSolver import *
 
+#OMA and CoopSIC Performance over N Users
+
 W = 1
 rho = 1
 N_0 = 1
@@ -27,7 +29,7 @@ d1x = 0.0;
 d2y = 1.0;
 d2x = 0.0;
 
-NUsers = 2
+NUsers = 10
 
 UsersCoopSIC = []
 UserCoopSICCapacities = []

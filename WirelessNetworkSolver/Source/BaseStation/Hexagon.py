@@ -23,7 +23,7 @@ class Hexagon:
 		y_ref = radius*math.sin( np.pi / 3 )	
 
 		x_pos =	2*radius + i*radius + i*x_ref
-		y_pos = j*2*y_ref + y_ref + radius/4 
+		y_pos = j*2*y_ref + y_ref + radius/4
 		
 		if (i % 2) != 0:
 			y_pos = y_pos + y_ref 

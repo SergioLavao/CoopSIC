@@ -19,7 +19,7 @@ dy = -1:0.00869:1;
 hexagon_vertices = [-1.15, 0; -0.57, 1; 0.57, 1; 1.15, 0; 0.57, -1; -0.57, -1];
 
 c = 0;
-[MaxCapOMAOCI, MaxCapCoopSICOCI ] = deal(NaN*ones(1,c)); 
+[MaxCapOMAOCI, MaxCapCoopSICOCI, MaxCapIaN ] = deal(NaN*ones(1,c)); 
 
 for i = 1 : 1 : 1000
 
@@ -36,8 +36,9 @@ for i = 1 : 1 : 1000
 
         c = c + 1;
         MaxCapOMAOCI(i) = OCIOptimalOMAN( P,W,N_0,alpha,d1x(i),d1y(i),d2x(i),d2y(i),d3x(i),d3y(i));
-        MaxCapCoopSICOCI(i) = OCIPermCoopSIC(P,W,rho,N_0,alpha,d1x(i),d1y(i),d2x(i),d2y(i),d3x(i),d3y(i));
-    
+        MaxCapCoopSICOCI(i) = OCIPermCoopSICN2N3(P,W,rho,N_0,alpha,d1x(i),d1y(i),d2x(i),d2y(i),d3x(i),d3y(i));
+        MaxCapIaN(i) = IaNModel( P,W,N_0,alpha,d1x(i),d1y(i),d2x(i),d2y(i),d3x(i),d3y(i) );
+
     else
 
         d1x(i) = NaN;
@@ -55,6 +56,7 @@ end
 
 meanOMA = mean(MaxCapOMAOCI)
 meanCoopSIC = mean(MaxCapCoopSICOCI)
+meanIaN = mean( MaxCapIaN )
 
 plot( d1x,d1y , "*","Color","r")
 
@@ -74,5 +76,5 @@ plot( polyshape([ hexagon_vertices(:,1) - 1.72, hexagon_vertices(:,2) + 1]) )
 
 plot( polyshape([ hexagon_vertices(:,1), hexagon_vertices(:,2) + 2]) )
 
-ylim([-5,5])
-xlim([-5,5])
+ylim([-1.5,3.5])
+xlim([-3.2,1.8])

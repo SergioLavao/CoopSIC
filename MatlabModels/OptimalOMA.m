@@ -1,4 +1,4 @@
-function [R1_OMA, R2_OMA] = OptimalOMA( P,h1,h2,RateVectorSize, b_plotOMA )
+function [R1_OMA, R2_OMA] = OptimalOMA( P,h1, h2, RateVectorSize, b_plotOMA )
 
     c = 0;
     max_R1 = log2( 1 + P*h1 );
